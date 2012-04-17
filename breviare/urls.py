@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-
+from django.views.generic.simple import direct_to_template
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 from breviare_urls.views import *
@@ -17,4 +17,6 @@ urlpatterns = patterns('',
 	url(r'^admin_tools/', include('admin_tools.urls')),
     url(r'^admin/', include(admin.site.urls)),
 	url(r'shorten/$', 'breviare_urls.views.shorten_link'),
+	url(r'visit/$', 'breviare_urls.views.link_click'),
+	(r'^$', direct_to_template, {'template': 'index.html'}, "home"),
 )
