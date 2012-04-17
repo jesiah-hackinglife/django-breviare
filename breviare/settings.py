@@ -126,6 +126,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
 	'menu',
 	'south',
+	'breviare_urls'
     # Uncomment the next line to enable admin documentation:
     #'django.contrib.admindocs',
 )

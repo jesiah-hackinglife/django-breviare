@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
- class Link(models.Model):
+class Link(models.Model):
 	link = models.URLField(max_length=500)
 	link_short = models.URLField(max_length=500) #our shortend URL
 	created_on = models.DateTimeField(auto_now=True)
@@ -9,6 +9,9 @@ from django.db import models
 	
 	def __unicode__(self):
 		return self.link
+	def total_clicks(self):
+		link_clicks = Click.objects.filter(link=self.link)
+		return link_clicks #return all clicks of a link (all time)
 
 
 class Click(models.Model): #Stats and Analytics pertaining to the click of a link
@@ -19,8 +22,6 @@ class Click(models.Model): #Stats and Analytics pertaining to the click of a lin
 	location = models.CharField(max_length=200) #general location Not specific 
 	def __unicode__(self): 
 		return self.link+" Clicks"
-	def total_clicks(self):
-		link_clicks = Click.objects.filter(link=self.link)
-		return link_clicks #return all clicks of a link (all time)
+	
 		
 	
