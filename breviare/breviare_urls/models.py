@@ -1,14 +1,16 @@
 from django.db import models
 
+
 # Create your models here.
 class Link(models.Model):
 	link = models.URLField(max_length=500)
-	link_short = models.URLField(max_length=500) #our shortend URL
+	link_short = models.URLField(max_length=500,blank = True, null = True) #our shortend URL 
 	created_on = models.DateTimeField(auto_now=True)
 	created_by = models.CharField(max_length=50) #IP address for now - In user auth model for the future would be user object
 	
 	def __unicode__(self):
 		return self.link
+	
 	def total_clicks(self):
 		link_clicks = Click.objects.filter(link=self.link)
 		return link_clicks #return all clicks of a link (all time)

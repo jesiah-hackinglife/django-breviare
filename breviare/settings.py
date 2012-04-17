@@ -144,6 +144,9 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static', 
 )
 
+#This is our constant for url generators base URL 
+BASE_URL = "http://brv.ia/"
+
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
 # the site admins on every HTTP 500 error.
