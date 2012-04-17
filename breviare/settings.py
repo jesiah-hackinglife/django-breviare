@@ -140,7 +140,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     # required by django-admin-tools
     'django.core.context_processors.request',
-    'django.core.context_processors.static',
+    'django.core.context_processors.static', 
 )
 
 # A sample logging configuration. The only tangible logging
