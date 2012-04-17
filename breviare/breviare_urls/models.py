@@ -12,8 +12,7 @@ class Link(models.Model):
 		return self.link
 	
 	def total_clicks(self):
-		link_clicks = Click.objects.filter(link=self.link)
-		return link_clicks #return all clicks of a link (all time)
+		return Click.objects.filter(link=self).count() #return all clicks of a link (all time)
 
 
 class Click(models.Model): #Stats and Analytics pertaining to the click of a link
@@ -23,7 +22,7 @@ class Click(models.Model): #Stats and Analytics pertaining to the click of a lin
 	refer = models.URLField(max_length=500, default="Direct") #whats the website or system that refered - Could be Direct 
 	location = models.CharField(max_length=200) #general location Not specific 
 	def __unicode__(self): 
-		return self.link+" Clicks"
+		return self.link
 	
 		
 	

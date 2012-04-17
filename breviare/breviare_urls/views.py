@@ -8,10 +8,11 @@ from utils import BASE10,BASE62,baseconvert
 #This is our main link hash function 
 def shorten_link(request):
 	submit_link = request.GET['link']
-	if 'http://' not in submit_link:    #could be expanded to https 
+	#Need to replace the following with regexpression filteration 
+	if 'http://' not in submit_link:   
 		submit_link = 'http://'+submit_link
-	link = Link.objects.get_or_create(link=submit_link,created_by=request.META.get("REMOTE_ADDR","")) #need to save the url first before we hash it because we are basing the hash on the unique ID
-	if not link[0].link_short: #Get OR CREATE returns a tuple of the object and a boolean value  - highlighting the object here
+	link = Link.objects.get_or_create(link=submit_link,created_by=request.META.get("REMOTE_ADDR","")) #need to save the link obj first before we hash it because we are basing the hash on the unique ID
+	if not link[0].link_short: #Get OR CREATE returns a tuple of the object and a boolean value  - highlighting the object here [0]
 		link[0].link_short = BASE_URL+baseconvert(link[0].pk,BASE10,BASE62)
 		link[0].save()
 	return render(request,'index.html',{'short_url':link[0].link_short},content_type="text/html") #BASE_URL from settings file
@@ -24,7 +25,7 @@ def link_click(request):
 		return render(request,'nolink.html',content_type="text/html")
 	
 	click = Click.objects.create(link=short_link,clicked_by=request.META.get("REMOTE_ADDR","")) #makes a link
-	return HttpResponseRedirect(short_link.link)
+	return HttpResponseRedirect(short_link.link) #Redirects you to the appropriate link 
 
 		
 	#figuring out what meta gives you what kind of data	
